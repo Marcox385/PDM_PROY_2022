@@ -4,12 +4,25 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.18.2 <3.0.0'
+  sdk: '>=2.17.2 <3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  # cupertino_icons: ^1.0.2
+  barcode:
+  flutter_launcher_icons:
+  google_sign_in:
+  image_picker:
+  qr_flutter:
+  # Bloc
+  flutter_bloc:
+  equatable:
+  # Firebase
+  cloud_firestore:
+  firebase_auth:
+  firebase_core:
+  firebase_storage:
+  flutterfire_ui:
 
 dev_dependencies:
   flutter_test:
@@ -17,3 +30,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/
