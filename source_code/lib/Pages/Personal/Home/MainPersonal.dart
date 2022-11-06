@@ -1,4 +1,4 @@
-
+import 'package:dental385/themes.dart';
 import 'package:flutter/material.dart';
 
 class MainPersonal extends StatelessWidget {
@@ -10,37 +10,64 @@ class MainPersonal extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 101, 44, 179),
+          backgroundColor: primaryColorPersonal,
           title: const Text('Bienvenid@ {{nombre de personal}}'),
         ),
-        body: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(30.0),
-              child: ElevatedButton(
-                child: Text("Ver citas pendientes"),
-                onPressed: () {},
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: ElevatedButton(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text("Ver citas pendientes",
+                            style: Theme.of(context).textTheme.headlineSmall),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                          minimumSize: Size.fromHeight(50),
+                          backgroundColor: Theme.of(context).canvasColor,
+                          side: BorderSide(width: 1.0, color: Colors.grey)),
+                      onPressed: () {},
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: ElevatedButton(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text("Ver calendario",
+                            style: Theme.of(context).textTheme.headlineSmall),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                          minimumSize: Size.fromHeight(50),
+                          backgroundColor: Theme.of(context).canvasColor,
+                          side: BorderSide(width: 1.0, color: Colors.grey)),
+                      onPressed: () {},
+                    ),
+                  ),
+                ],
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(30.0),
-              child: ElevatedButton(
-                child: Text("Ver calendario"),
-                onPressed: () {},
-              ),
-            ),
-            Container(
-              height: 350,
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: IconButton(
-                icon: Icon(Icons.qr_code),
-                iconSize: 100,
-                onPressed: () {},
-              ),
-            ),
-          ],
+              Column(
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.qr_code_2),
+                    iconSize: 150,
+                    tooltip: 'Leer QR',
+                    onPressed: () {},
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20.0),
+                    child: Text('Lector de QR',
+                        style: Theme.of(context).textTheme.titleLarge),
+                  ),
+                ],
+              )
+            ],
+          ),
         ));
   }
 }

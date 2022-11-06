@@ -31,14 +31,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: proyThemes.lightTheme,
         title: 'Dental385',
-        // home: Scaffold(
-        //     appBar: AppBar(
-        //       title: Text('Prueba'),
-        //     ),
-        //   )
         home: FirebaseAuth.instance.currentUser != null
             ? HomePage()
             : FormBodyFirebase());
-    // home: HomePage());
   }
 }
