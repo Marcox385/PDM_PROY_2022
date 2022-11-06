@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PerfilPaciente extends StatelessWidget {
   const PerfilPaciente({
@@ -7,31 +8,38 @@ class PerfilPaciente extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var _formated = Theme.of(context).textTheme.titleLarge;
+    var _field = Theme.of(context).textTheme.titleMedium;
+    SizedBox Separator = SizedBox(height: 20.0);
+
     return Container(
       child: Column(
         children: [
           Padding(
             padding: const EdgeInsets.all(14.0),
             child: CircleAvatar(
-              child: Icon(Icons.cell_tower_rounded),
+              child: Icon(FontAwesomeIcons.tooth, size: 85.0),
               radius: 80,
             ),
           ),
-          Text("Paciente", style: TextStyle(fontWeight: FontWeight.bold)),
-          Text("{{nombre de paciente}}"),
+          Text("Paciente", style: _formated),
+          Text("{{Nombre del paciente}}",
+              style: _field, textAlign: TextAlign.center),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Divider(thickness: 1.0),
           ),
-          Text("Teléfono", style: TextStyle(fontWeight: FontWeight.bold)),
-          Text("{{telefono de paciente}}"),
-          Divider(),
-          Text("Fecha de nacimiento",
-              style: TextStyle(fontWeight: FontWeight.bold)),
-          Text("{{fecha de nacimiento de paciente}}"),
-          Divider(),
-          Text("Sexo", style: TextStyle(fontWeight: FontWeight.bold)),
-          Text("{{sexo de paciente}}")
+          Text("Teléfono", style: _formated),
+          Text("{{telefono de paciente}}",
+              style: _field, textAlign: TextAlign.center),
+          Separator,
+          Text("Fecha de nacimiento", style: _formated),
+          Text("{{fecha de nacimiento de paciente}}",
+              style: _field, textAlign: TextAlign.center),
+          Separator,
+          Text("Sexo", style: _formated),
+          Text("{{sexo de paciente}}",
+              style: _field, textAlign: TextAlign.center)
         ],
       ),
     );

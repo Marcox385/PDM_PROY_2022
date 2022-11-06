@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PromoMesPaciente extends StatelessWidget {
   const PromoMesPaciente({
@@ -9,36 +10,37 @@ class PromoMesPaciente extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 45, 155, 240),
+          backgroundColor: Theme.of(context).primaryColor,
           title: const Text('Promos del mes'),
         ),
         body: Column(children: [
-          PromoComponent(),
+          _promoItem(context, 'Promo', 'Promoción del mes', false),
           Divider(
             thickness: 2,
           ),
-          PromoComponent(),
+          _promoItem(context, 'Descuento', 'Mega descuento', true),
           Divider(
             thickness: 2,
           )
         ]));
   }
-}
 
-class PromoComponent extends StatelessWidget {
-  const PromoComponent({super.key});
+  Widget _promoItem(
+      context, String promoName, String description, bool isDiscount) {
+    Icon itemIcon = Icon(
+        isDiscount ? FontAwesomeIcons.percent : FontAwesomeIcons.tag,
+        color: isDiscount ? Theme.of(context).primaryColor : Colors.pink,
+        size: 40.0);
 
-  @override
-  Widget build(BuildContext context) {
     return Row(children: [
       Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Icon(Icons.access_alarm, size: 40),
+        child: itemIcon,
       ),
       Column(
         children: [
-          Text("PromoName", style: TextStyle(fontSize: 24)),
-          Text("Brief description", style: TextStyle(color: Colors.grey)),
+          Text(promoName, style: TextStyle(fontSize: 24)),
+          Text(description, style: TextStyle(color: Colors.grey)),
         ],
       )
     ]);

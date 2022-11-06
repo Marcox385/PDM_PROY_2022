@@ -36,9 +36,9 @@ class MyApp extends StatelessWidget {
         //       title: Text('Prueba'),
         //     ),
         //   )
-        // home: FirebaseAuth.instance.currentUser != null
-        //     ? HomePage()
-        //     : FormBodyFirebase());
-        home: HomePage());
+        home: FirebaseAuth.instance.currentUser != null
+            ? HomePage()
+            : FormBodyFirebase());
+    // home: HomePage());
   }
 }

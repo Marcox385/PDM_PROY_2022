@@ -6,9 +6,11 @@
  * Contenedor para seleccionar pantallas del paciente
  */
 import 'package:dental385/Pages/Paciente/Home/home_screen.dart';
+import 'package:dental385/Pages/Paciente/Misc/HistorialPaciente.dart';
+import 'package:dental385/Pages/Paciente/Misc/PromoMesPaciente.dart';
 import 'package:dental385/Pages/Paciente/Misc/hacer_cita.dart';
 import 'package:dental385/Pages/Paciente/Profile/PerfilPaciente.dart';
-import 'package:dental385/Pages/Paciente/QR/QRPaciente.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -21,18 +23,37 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _currentPageIndex = 0;
-  final _pagesNamesList = ['Inicio', 'Ver QR', 'Hacer cita', 'Perfil', 'Salir'];
+  final _pagesNamesList = [
+    'Inicio',
+    'Perfil',
+    'Nueva cita',
+    'Historial',
+    'Salir'
+  ];
   final _pagesList = [
     HomeScreen(),
-    QRPaciente(),
-    HacerCita(),
     PerfilPaciente(),
+    HacerCita(),
+    HistorialPaciente(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Bienvenido {{paciente}}')),
+      appBar: AppBar(
+        title: Text('Bienvenid@ {{paciente}}'),
+        actions: [
+          IconButton(
+              icon: Icon(FontAwesomeIcons.gift),
+              tooltip: 'Promociones del mes',
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => PromoMesPaciente()));
+              })
+        ],
+      ),
       body: IndexedStack(
         index: _currentPageIndex,
         children: _pagesList,
@@ -44,11 +65,11 @@ class _HomePageState extends State<HomePage> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.home), label: _pagesNamesList[0]),
             BottomNavigationBarItem(
-                icon: Icon(Icons.qr_code), label: _pagesNamesList[1]),
+                icon: Icon(Icons.person), label: _pagesNamesList[1]),
             BottomNavigationBarItem(
                 icon: Icon(Icons.add_circle), label: _pagesNamesList[2]),
             BottomNavigationBarItem(
-                icon: Icon(Icons.person), label: _pagesNamesList[3]),
+                icon: Icon(Icons.list_alt), label: _pagesNamesList[3]),
             BottomNavigationBarItem(
                 icon: Icon(Icons.logout), label: _pagesNamesList[4])
           ],

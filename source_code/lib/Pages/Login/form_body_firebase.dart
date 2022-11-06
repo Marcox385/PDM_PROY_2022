@@ -13,21 +13,24 @@ class FormBodyFirebase extends StatelessWidget {
         body: SignInScreen(
             showAuthActionSwitch: false,
             headerBuilder: (context, constraints, breakpoint) {
-              return Center(child: Image.asset('assets/app_icon.png', height: 120));
+              return Center(
+                  child: Column(
+                children: [
+                  SizedBox(height: 14.0),
+                  Image.asset('assets/app_icon.png', height: 120),
+                  Text('DENTAL385')
+                ],
+              ));
             },
             providerConfigs: [
-              EmailProviderConfiguration(),
-              GoogleProviderConfiguration(clientId: GOOGLE_CLIENT_ID)
-            ],
-            footerBuilder: (context, action) {
-              return Text(
-                  'Al entrar a la aplicación, aceptas nuestro términos y condiciones.');
-            },
+          EmailProviderConfiguration(),
+          GoogleProviderConfiguration(clientId: GOOGLE_CLIENT_ID)
+        ],
             actions: [
-              AuthStateChangeAction<SignedIn>(((context, state) {
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => HomePage()));
-              }))
-            ]));
+          AuthStateChangeAction<SignedIn>(((context, state) {
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => HomePage()));
+          }))
+        ]));
   }
 }
