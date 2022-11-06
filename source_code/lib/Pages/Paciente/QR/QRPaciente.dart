@@ -7,12 +7,7 @@ class QRPaciente extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).primaryColor,
-          title: const Text('QR'),
-        ),
-        body: Column(
+    return Column(
           children: [
             Container(
               height: 150,
@@ -23,6 +18,6 @@ class QRPaciente extends StatelessWidget {
             ),
             Text("Paciente {{nombre paciente}}")
           ],
-        ));
+        );
   }
 }

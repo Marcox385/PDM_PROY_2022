@@ -7,12 +7,7 @@ class HistorialPaciente extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 45, 155, 240),
-          title: const Text('Historial'),
-        ),
-        body: ListView(
+    return ListView(
           children: [
             Center(
               child: Padding(
@@ -27,6 +22,6 @@ class HistorialPaciente extends StatelessWidget {
               ),
             )
           ],
-        ));
+        );
   }
 }
