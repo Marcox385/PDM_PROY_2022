@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class QRPaciente extends StatelessWidget {
   const QRPaciente({
@@ -16,9 +17,14 @@ class QRPaciente extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.qr_code_2,
-              size: 300,
+            // Icon(
+            //   Icons.qr_code_2,
+            //   size: 300,
+            // ),
+            QrImage(
+              data: "Nombre del paciente\nCarlos be wildin",
+              version: QrVersions.auto,
+              size: 300.0,
             ),
             Text('Paciente', style: Theme.of(context).textTheme.headlineMedium),
             Text(

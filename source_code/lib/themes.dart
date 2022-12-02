@@ -11,7 +11,9 @@ Color primaryColorPaciente = Color.fromARGB(255, 45, 155, 240);
 Color primaryColorPersonal = Color.fromARGB(255, 0, 230, 210);
 
 AppBarTheme mainAppBarTheme =
-    AppBarTheme(backgroundColor: primaryColorPaciente);
+    AppBarTheme(backgroundColor: primaryColorPaciente
+    
+    );
 
 ThemeData lightTheme = ThemeData(
     appBarTheme: mainAppBarTheme,
