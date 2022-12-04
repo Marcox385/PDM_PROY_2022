@@ -44,3 +44,4 @@ app.*.map.json
 # Own
 /**/secrets.dart
 /**/*.psd
+qr_test.dart

@@ -20,6 +20,8 @@ class _QRPersonalState extends State<QRPersonal> {
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
+  bool enabled = false;
+
   @override
   void reassemble() {
     super.reassemble();
@@ -37,6 +39,17 @@ class _QRPersonalState extends State<QRPersonal> {
           title: const Text('Lector QR'),
           actions: [
             IconButton(
+                icon: Icon((enabled) ? Icons.visibility : Icons.visibility_off),
+                onPressed: () async {
+                  if (enabled)
+                    await controller?.pauseCamera();
+                  else
+                    await controller?.resumeCamera();
+
+                  enabled = !enabled;
+                  setState(() {});
+                }),
+            IconButton(
                 icon: Icon(Icons.cameraswitch),
                 onPressed: () async {
                   await controller?.flipCamera();
@@ -51,21 +64,24 @@ class _QRPersonalState extends State<QRPersonal> {
             Expanded(
                 flex: 1,
                 child: ElevatedButton(
-                  child: (result == null)
-                      ? Text('Escaneando...')
-                      : Text('Ver datos'),
+                  child: (!enabled)
+                      ? Text('Cámara deshabilitada')
+                      : (result == null)
+                          ? Text('Escaneando...')
+                          : Text('Ver datos'),
                   style: ElevatedButton.styleFrom(
                       backgroundColor: (result == null)
                           ? Colors.grey
                           : primaryColorPersonal),
                   onPressed: (result == null)
                       ? null
-                      : (() {
+                      : (() async {
                           if (result != null) {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => QRResults()));
+                            await controller?.pauseCamera();
+                            enabled = false;
+                            await Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) =>
+                                    QRResults(raw_data: result!.code!)));
                             result = null;
                             setState(() {});
                           }

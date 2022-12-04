@@ -1,22 +1,51 @@
+import 'package:dental385/Pages/Personal/Home/MainPersonal.dart';
 import 'package:dental385/themes.dart';
 import 'package:flutter/material.dart';
 
 class QRResults extends StatelessWidget {
-  const QRResults({super.key});
+  final String raw_data;
+  const QRResults({super.key, required this.raw_data});
+
+  List<String> parseQR(String raw_data) {
+    return raw_data.split('||');
+  }
 
   @override
   Widget build(BuildContext context) {
+    List data = parseQR(raw_data);
     return Scaffold(
-      appBar: AppBar(
+        appBar: AppBar(
           backgroundColor: primaryColorPersonal,
-          title: const Text('Datos del paciente'),
-        ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Text('Works!')
+          title: Text('Datos del paciente'),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.home),
+              onPressed: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (context) => MainPersonal()),
+                    (route) => false);
+              },
+            )
           ],
-        )
-    );
+        ),
+        body: ListView(
+          children: [
+            Card(
+                child: ListTile(
+                    leading: Icon(Icons.person, size: 50.0),
+                    title: Text('Nombre'),
+                    subtitle: Text('${data[0]}'))),
+            Card(
+                child: ListTile(
+                    leading: Icon(Icons.calendar_month, size: 50.0),
+                    title: Text('Cita'),
+                    subtitle: Text('${data[1]}'))),
+            Card(
+                child: ListTile(
+                    leading: Icon(Icons.cake, size: 50.0),
+                    title: Text('Fecha de nacimiento'),
+                    subtitle: Text('${data[2]}'))),
+          ],
+        ));
   }
 }
