@@ -29,7 +29,6 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: proyThemes.lightTheme,
         title: 'Dental385',
-        // home: LoginPage()
-        home: MainPersonal());
+        home: LoginPage());
   }
 }
