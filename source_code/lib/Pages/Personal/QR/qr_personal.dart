@@ -55,7 +55,7 @@ class _QRPersonalState extends State<QRPersonal> {
                       ? Text('Escaneando...')
                       : Text('Ver datos'),
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: (result == null)
+                      primary: (result == null)
                           ? Colors.grey
                           : primaryColorPersonal),
                   onPressed: (result == null)
