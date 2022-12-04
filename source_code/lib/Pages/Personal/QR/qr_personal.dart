@@ -45,34 +45,32 @@ class _QRPersonalState extends State<QRPersonal> {
           ],
         ),
         body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Expanded(flex: 6, child: _buildQrView(context)),
+            Expanded(flex: 11, child: _buildQrView(context)),
             Expanded(
-              child: FittedBox(
-                fit: BoxFit.contain,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    // if (result == null)
-                    //   const Text('Escaneando...')
-                    // else
-                    //   Text(
-                    //       'Tipo: ${describeEnum(result!.format)}  Resultados: ${result!.code}')
-
-                    ElevatedButton(
-                      child: (result == null) ? Text('Escaneando...') : Text('Ver datos'),
-                      onPressed: (() {
-                        if (result != null) 
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => QRResults()));
-                      }),
-                    )
-                  ],
-                ),
-              ),
-            )
+                flex: 1,
+                child: ElevatedButton(
+                  child: (result == null)
+                      ? Text('Escaneando...')
+                      : Text('Ver datos'),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: (result == null)
+                          ? Colors.grey
+                          : primaryColorPersonal),
+                  onPressed: (result == null)
+                      ? null
+                      : (() {
+                          if (result != null) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => QRResults()));
+                            result = null;
+                            setState(() {});
+                          }
+                        }),
+                ))
           ],
         ));
   }
