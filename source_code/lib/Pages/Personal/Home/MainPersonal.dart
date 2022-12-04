@@ -30,7 +30,7 @@ class MainPersonal extends StatelessWidget {
                       ),
                       style: ElevatedButton.styleFrom(
                           minimumSize: Size.fromHeight(50),
-                          backgroundColor: Theme.of(context).canvasColor,
+                          primary: Theme.of(context).canvasColor,
                           side: BorderSide(width: 1.0, color: Colors.grey)),
                       onPressed: () {},
                     ),
@@ -45,7 +45,7 @@ class MainPersonal extends StatelessWidget {
                       ),
                       style: ElevatedButton.styleFrom(
                           minimumSize: Size.fromHeight(50),
-                          backgroundColor: Theme.of(context).canvasColor,
+                          primary: Theme.of(context).canvasColor,
                           side: BorderSide(width: 1.0, color: Colors.grey)),
                       onPressed: () {},
                     ),

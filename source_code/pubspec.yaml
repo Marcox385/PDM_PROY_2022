@@ -26,6 +26,8 @@ dependencies:
   firebase_core:
   firebase_storage:
   flutterfire_ui:
+  # Notifications
+  awesome_notifications:
 
 dev_dependencies:
   flutter_test:
