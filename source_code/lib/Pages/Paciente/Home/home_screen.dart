@@ -17,6 +17,7 @@ class HomeScreen extends StatelessWidget {
         child: Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text('Próxima cita',
               style: Theme.of(context)
@@ -40,7 +41,7 @@ class HomeScreen extends StatelessWidget {
                   .textTheme
                   .headlineLarge!
                   .copyWith(fontWeight: FontWeight.bold)),
-          SizedBox(height: 15.0),
+          // SizedBox(height: 15.0),
           Text(
             '{{DD}} Días\n'
             '{{HH}} Horas\n'
@@ -49,7 +50,7 @@ class HomeScreen extends StatelessWidget {
             style: Theme.of(context).textTheme.headlineMedium,
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: 35.0),
+          // SizedBox(height: 35.0),
           IconButton(
               icon: Icon(Icons.qr_code_2),
               iconSize: 90.0,

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -12,16 +13,21 @@ class PerfilPaciente extends StatelessWidget {
     var _field = Theme.of(context).textTheme.titleMedium;
     SizedBox Separator = SizedBox(height: 20.0);
 
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final user = auth.currentUser;
+
     return Container(
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(14.0),
-            child: CircleAvatar(
-              child: Icon(FontAwesomeIcons.tooth, size: 85.0),
-              radius: 80,
-            ),
-          ),
+              padding: const EdgeInsets.all(14.0),
+              child: ClipOval(
+                  child: SizedBox.fromSize(
+                      size: Size.fromRadius(85.0),
+                      child: (user!.photoURL == null)
+                          ? CircleAvatar(
+                              child: Icon(FontAwesomeIcons.tooth, size: 85.0))
+                          : Image.network(user.photoURL!, fit: BoxFit.cover)))),
           Text("Paciente", style: _formated),
           Text("{{Nombre del paciente}}",
               style: _field, textAlign: TextAlign.center),
