@@ -9,12 +9,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  barcode:
   flutter_launcher_icons:
   font_awesome_flutter:
   google_sign_in:
   image_picker:
+  qr_code_scanner:
   qr_flutter:
+  table_calendar:
   url_launcher:
   # Bloc
   flutter_bloc:

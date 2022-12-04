@@ -17,10 +17,6 @@ class QRPaciente extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Icon(
-            //   Icons.qr_code_2,
-            //   size: 300,
-            // ),
             QrImage(
               data: "Nombre del paciente\nCarlos be wildin",
               version: QrVersions.auto,

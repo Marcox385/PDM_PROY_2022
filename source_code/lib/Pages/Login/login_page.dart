@@ -1,5 +1,5 @@
-import 'package:dental385/Pages/Login/form_body_firebase.dart';
-import 'package:dental385/Pages/Login/form_body_firebase_user.dart';
+import 'package:dental385/Pages/Login/firelogin_personal.dart';
+import 'package:dental385/Pages/Login/firelogin_pacient.dart';
 import 'package:dental385/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -56,10 +56,10 @@ class LoginPage extends StatelessWidget {
         if (isMain) {
           // AuthService().signInWithGoogle();
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => FormBodyFirebaseUser()));
+              MaterialPageRoute(builder: (context) => FireLoginPacient()));
         } else {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => FormBodyFirebase()));
+              MaterialPageRoute(builder: (context) => FireLoginPersonal()));
         }
       },
     );

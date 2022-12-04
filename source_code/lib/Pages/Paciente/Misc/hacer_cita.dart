@@ -1,14 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:table_calendar/table_calendar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class HacerCita extends StatelessWidget {
+class HacerCita extends StatefulWidget {
   const HacerCita({super.key});
 
+  @override
+  State<HacerCita> createState() => HacerCitaState();
+}
+
+class HacerCitaState extends State<HacerCita> {
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(
         children: [
+          TableCalendar(
+              firstDay: DateTime.utc(2010, 10, 16),
+              lastDay: DateTime.utc(2030, 3, 14),
+              focusedDay: DateTime.now()),
           Expanded(child: Container()),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

@@ -1,3 +1,4 @@
+import 'package:dental385/Pages/Personal/QR/qr_personal.dart';
 import 'package:dental385/themes.dart';
 import 'package:flutter/material.dart';
 
@@ -57,7 +58,12 @@ class MainPersonal extends StatelessWidget {
                     icon: Icon(Icons.qr_code_2),
                     iconSize: 150,
                     tooltip: 'Leer QR',
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => QRPersonal()));
+                    },
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20.0),

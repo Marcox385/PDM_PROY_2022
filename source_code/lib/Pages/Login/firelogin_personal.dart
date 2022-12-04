@@ -1,12 +1,9 @@
-import 'package:dental385/Pages/Login/pacient_service.dart';
-import 'package:dental385/Pages/Paciente/Home/home_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:dental385/Pages/Personal/Home/MainPersonal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/auth.dart';
-import 'package:dental385/secrets.dart';
 
-class FormBodyFirebaseUser extends StatelessWidget {
-  const FormBodyFirebaseUser({super.key});
+class FireLoginPersonal extends StatelessWidget {
+  const FireLoginPersonal({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,13 +21,12 @@ class FormBodyFirebaseUser extends StatelessWidget {
               ));
             },
             providerConfigs: [
-          GoogleProviderConfiguration(clientId: GOOGLE_CLIENT_ID)
+          EmailProviderConfiguration()
         ],
             actions: [
-          AuthStateChangeAction<SignedIn>(((context, state) async {
-            await PacientService().pacientLogin();
+          AuthStateChangeAction<SignedIn>(((context, state) {
             Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => HomePage()),
+                MaterialPageRoute(builder: (context) => MainPersonal()),
                 (route) => false);
           }))
         ]));
