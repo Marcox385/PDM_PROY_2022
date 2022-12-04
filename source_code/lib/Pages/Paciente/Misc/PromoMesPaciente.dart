@@ -1,3 +1,4 @@
+import 'package:dental385/Pages/Login/pacient_service.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -13,16 +14,27 @@ class PromoMesPaciente extends StatelessWidget {
           backgroundColor: Theme.of(context).primaryColor,
           title: const Text('Promos del mes'),
         ),
-        body: Column(children: [
-          _promoItem(context, 'Promo', 'Promoción del mes', 0),
-          Divider(
-            thickness: 2,
-          ),
-          _promoItem(context, 'Descuento', 'Mega descuento', 1),
-          Divider(
-            thickness: 2,
-          )
-        ]));
+        body: FutureBuilder(
+            future: PacientService().getPromos(),
+            builder: ((context, data) {
+              if (!data.hasData)
+                return Center(child: CircularProgressIndicator());
+
+              var promoList = data.data as List<Map>;
+
+              if (promoList.length == 0) return Center(
+                    child: Text('No hay promociones disponibles al momento'));
+
+              return ListView.builder(
+                itemCount: promoList.length,
+                itemBuilder: ((context, index) {
+                  dynamic curr_item = promoList[index];
+
+                  return _promoItem(context, curr_item['titulo'],
+                      curr_item['desc'], curr_item['tipo']);
+                }),
+              );
+            })));
   }
 
   Widget _promoItem(
@@ -43,20 +55,12 @@ class PromoMesPaciente extends StatelessWidget {
         color = Colors.yellow;
     }
 
-    Icon itemIcon = Icon(
-        icon, color: color, size: 40.0);
-
-    return Row(children: [
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: itemIcon,
+    return Card(
+      child: ListTile(
+        leading: Icon(icon, color: color, size: 40.0),
+        title: Text(promoName, style: TextStyle(fontSize: 24)),
+        subtitle: Text(description, style: TextStyle(color: Colors.grey)),
       ),
-      Column(
-        children: [
-          Text(promoName, style: TextStyle(fontSize: 24)),
-          Text(description, style: TextStyle(color: Colors.grey)),
-        ],
-      )
-    ]);
+    );
   }
 }

@@ -71,7 +71,7 @@ class PacientService {
 
       await pacients.get().then((QuerySnapshot querySnapshot) async {
         querySnapshot.docs.forEach((doc) {
-          print(doc.data());
+          promoList.add(doc.data() as Map);
         });
       });
 
