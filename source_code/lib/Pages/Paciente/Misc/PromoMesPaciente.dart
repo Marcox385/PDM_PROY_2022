@@ -14,11 +14,11 @@ class PromoMesPaciente extends StatelessWidget {
           title: const Text('Promos del mes'),
         ),
         body: Column(children: [
-          _promoItem(context, 'Promo', 'Promoción del mes', false),
+          _promoItem(context, 'Promo', 'Promoción del mes', 0),
           Divider(
             thickness: 2,
           ),
-          _promoItem(context, 'Descuento', 'Mega descuento', true),
+          _promoItem(context, 'Descuento', 'Mega descuento', 1),
           Divider(
             thickness: 2,
           )
@@ -26,11 +26,25 @@ class PromoMesPaciente extends StatelessWidget {
   }
 
   Widget _promoItem(
-      context, String promoName, String description, bool isDiscount) {
+      context, String promoName, String description, int promoType) {
+    dynamic icon, color;
+
+    switch (promoType) {
+      case 0:
+        icon = FontAwesomeIcons.tag;
+        color = Colors.pink;
+        break;
+      case 1:
+        icon = FontAwesomeIcons.percent;
+        color = Theme.of(context).primaryColor;
+        break;
+      default:
+        icon = FontAwesomeIcons.gift;
+        color = Colors.yellow;
+    }
+
     Icon itemIcon = Icon(
-        isDiscount ? FontAwesomeIcons.percent : FontAwesomeIcons.tag,
-        color: isDiscount ? Theme.of(context).primaryColor : Colors.pink,
-        size: 40.0);
+        icon, color: color, size: 40.0);
 
     return Row(children: [
       Padding(

@@ -5,10 +5,7 @@
  * 
  * Punto de entrada inicial para aplicación  
  */
-import 'package:dental385/Pages/Login/form_body_firebase.dart';
 import 'package:dental385/Pages/Login/login_page.dart';
-import 'package:dental385/Pages/Paciente/Home/home_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,13 +26,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: proyThemes.lightTheme,
-        title: 'Dental385',
-        // home: FirebaseAuth.instance.currentUser != null
-        //     ? HomePage()
-        //     : FormBodyFirebase()
-        home: LoginPage()
-        );
+      debugShowCheckedModeBanner: false,
+      theme: proyThemes.lightTheme,
+      title: 'Dental385',
+      home: LoginPage()
+    );
   }
 }

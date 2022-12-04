@@ -45,7 +45,12 @@ class PerfilPaciente extends StatelessWidget {
           Separator,
           Text("Sexo", style: _formated),
           Text("{{sexo de paciente}}",
-              style: _field, textAlign: TextAlign.center)
+              style: _field, textAlign: TextAlign.center),
+          Expanded(child: Container()),
+          TextButton.icon(
+              icon: Icon(Icons.edit),
+              label: Text('Modificar datos'),
+              onPressed: () => print('IMPLEMENT BLOC'))
         ],
       ),
     );
