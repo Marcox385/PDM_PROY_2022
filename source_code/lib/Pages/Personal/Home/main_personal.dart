@@ -16,7 +16,7 @@ class MainPersonal extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: primaryColorPersonal,
-          title: const Text('Bienvenid@ {{nombre de personal}}'),
+          title: const Text('Bienvenid@ Marco'),
         ),
         body: Center(
           child: Column(
