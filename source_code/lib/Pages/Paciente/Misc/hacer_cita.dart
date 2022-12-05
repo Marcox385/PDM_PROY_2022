@@ -14,7 +14,7 @@ class HacerCita extends StatefulWidget {
 class HacerCitaState extends State<HacerCita> {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
-  int time = new Random().nextInt(10) + 9;
+  int time = new Random().nextInt(10) + 15;
   PacientService service = PacientService();
   
   @override

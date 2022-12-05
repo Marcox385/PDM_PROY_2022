@@ -1,7 +1,7 @@
-import 'package:dental385/Pages/Paciente/pacient_service.dart';
 import 'package:dental385/Pages/Personal/personal_service.dart';
 import 'package:dental385/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
 class CitasPersonal extends StatelessWidget {
@@ -30,20 +30,40 @@ class CitasPersonal extends StatelessWidget {
             return ListView.builder(
                 itemCount: citasToday.length,
                 itemBuilder: ((context, index) {
+                  int citaType = -1;
+                  DateTime now = DateTime.now();
                   print(citasToday[index].hour);
-                  print(citasToday[index].minute);
-                  print(formatter.format(citasToday[index]));
+                  print(now.hour);
+                  if (citasToday[index].hour > now.hour) {
+                    citaType = 0;
+                  } else {
+                    citaType = 1;
+                  }
                   return _listItem(
-                      context, formatter.format(citasToday[index]));
+                      context, formatter.format(citasToday[index]), citaType);
                 }));
           })),
     );
   }
 
-  Widget _listItem(context, String citaTime) {
+  Widget _listItem(context, String citaTime, int citaType) {
+    dynamic icon, color;
+    switch (citaType) {
+      case 0:
+        icon = FontAwesomeIcons.clock;
+        color = Colors.green;
+        break;
+      case 1:
+        icon = FontAwesomeIcons.clock;
+        color = Colors.red;
+        break;
+      default:
+        icon = FontAwesomeIcons.clock;
+        color = Colors.yellow;
+    }
     return Card(
       child: ListTile(
-        leading: Icon(Icons.verified_user, color: Colors.black, size: 40.0),
+        leading: Icon(icon, color: color, size: 40.0),
         title: Text(citaTime, style: TextStyle(fontSize: 24)),
       ),
     );
