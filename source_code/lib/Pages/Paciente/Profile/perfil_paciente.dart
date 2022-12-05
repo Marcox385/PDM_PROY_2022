@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dental385/Pages/Paciente/pacient_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -23,14 +22,10 @@ class PerfilPaciente extends StatelessWidget {
         builder: (((context, data) {
           if (!data.hasData) return Center(child: CircularProgressIndicator());
 
-          print(data);
-
           var pacient_data = data.data as Map<String, dynamic>;
 
           if (pacient_data.length == 0)
             return Center(child: Text('Error al cargar perfil'));
-
-          print(pacient_data);
 
           return Container(
             child: Column(
@@ -58,7 +53,7 @@ class PerfilPaciente extends StatelessWidget {
                     style: _field, textAlign: TextAlign.center),
                 Separator,
                 Text("Fecha de nacimiento", style: _formated),
-                Text("${(pacient_data['fecha_nacimiento'] as Timestamp)}",
+                Text("${pacient_data['fecha_nacimiento']}",
                     style: _field, textAlign: TextAlign.center),
                 Separator,
                 Text("Sexo", style: _formated),

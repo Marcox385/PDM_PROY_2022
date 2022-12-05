@@ -1,5 +1,5 @@
 import 'package:dental385/Pages/Paciente/pacient_service.dart';
-import 'package:dental385/Pages/Paciente/Home/home_page.dart';
+import 'package:dental385/Pages/Paciente/Home/main_paciente.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/auth.dart';
 import 'package:dental385/secrets.dart';
@@ -29,7 +29,7 @@ class FireLoginPacient extends StatelessWidget {
           AuthStateChangeAction<SignedIn>(((context, state) async {
             await PacientService().pacientLogin();
             Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => HomePage()),
+                MaterialPageRoute(builder: (context) => MainPaciente()),
                 (route) => false);
           }))
         ]));

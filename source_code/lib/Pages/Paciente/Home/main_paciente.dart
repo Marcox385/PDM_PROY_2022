@@ -6,7 +6,7 @@
  * Contenedor para seleccionar pantallas del paciente
  */
 import 'package:dental385/Pages/Paciente/pacient_service.dart';
-import 'package:dental385/Pages/Paciente/Home/home_screen.dart';
+import 'package:dental385/Pages/Paciente/Home/home_paciente.dart';
 import 'package:dental385/Pages/Paciente/Misc/historial_paciente.dart';
 import 'package:dental385/Pages/Paciente/Misc/promo_mes_paciente.dart';
 import 'package:dental385/Pages/Paciente/Misc/hacer_cita.dart';
@@ -15,14 +15,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class MainPaciente extends StatefulWidget {
+  const MainPaciente({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<MainPaciente> createState() => _MainPacienteState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _MainPacienteState extends State<MainPaciente> {
   int _currentPageIndex = 0;
   final _pagesNamesList = [
     'Inicio',
@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
     'Salir'
   ];
   final _pagesList = [
-    HomeScreen(),
+    HomePaciente(),
     PerfilPaciente(),
     HacerCita(),
     HistorialPaciente(),
@@ -43,7 +43,6 @@ class _HomePageState extends State<HomePage> {
     return FutureBuilder(
       future: PacientService().pacientFirstName(),
       builder: ((ctx, data) {
-        print(data.data);
         return Scaffold(
           appBar: AppBar(
             title: Text('Bienvenid@ ${data.data}'),
