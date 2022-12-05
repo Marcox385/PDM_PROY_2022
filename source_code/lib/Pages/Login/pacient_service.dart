@@ -62,6 +62,16 @@ class PacientService {
     }
   }
 
+  Future<int> pacientAddCita(DateTime new_cita) async {
+    await FirebaseFirestore.instance
+        .collection('pacientes')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .set({'citas': FieldValue.arrayUnion([new_cita])
+    }, SetOptions(merge: true));
+
+    return 0;
+  }
+
   Future<List<Map>> getPromos() async {
     try {
       CollectionReference pacients =
