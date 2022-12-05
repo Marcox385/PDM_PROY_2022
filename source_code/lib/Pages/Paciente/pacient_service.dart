@@ -73,17 +73,6 @@ class PacientService {
     return 0;
   }
 
-  Future<int> pacientAddCita(DateTime new_cita) async {
-    await FirebaseFirestore.instance
-        .collection('pacientes')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .set({
-      'citas': FieldValue.arrayUnion([new_cita])
-    }, SetOptions(merge: true));
-
-    return 0;
-  }
-
   Future<Map<String, dynamic>> pacientData() async {
     try {
       dynamic currUser = FirebaseAuth.instance.currentUser;
