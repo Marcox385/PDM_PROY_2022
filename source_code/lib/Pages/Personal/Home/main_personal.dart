@@ -1,10 +1,13 @@
+import 'package:dental385/Pages/Personal/Misc/CalendarioPersonal.dart';
+import 'package:dental385/Pages/Personal/personal_service.dart';
 import 'package:dental385/Pages/Personal/Misc/CitasPersonal.dart';
 import 'package:dental385/Pages/Personal/QR/qr_personal.dart';
 import 'package:dental385/themes.dart';
 import 'package:flutter/material.dart';
 
 class MainPersonal extends StatelessWidget {
-  const MainPersonal({
+  PersonalService service = PersonalService();
+  MainPersonal({
     Key? key,
   }) : super(key: key);
 
@@ -53,7 +56,15 @@ class MainPersonal extends StatelessWidget {
                           minimumSize: Size.fromHeight(50),
                           primary: Theme.of(context).canvasColor,
                           side: BorderSide(width: 1.0, color: Colors.grey)),
-                      onPressed: () {},
+                      onPressed: () async {
+                        List highs = await service.personalGetAllCitasParsed();
+                        List<DateTime> listDates = List<DateTime>.from(highs.map((date) => date));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    CalendarioPersonal(toHighlight: listDates)));
+                      },
                     ),
                   ),
                 ],

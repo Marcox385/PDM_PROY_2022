@@ -20,6 +20,18 @@ class PersonalService {
     return citas;
   }
 
+  Future<List> personalGetAllCitasParsed() async {
+    List allCitas = [];
+    allCitas = await personalGetAllCitas();
+    List parsedCitas = [];
+    for (int i = 0; i < allCitas.length; i++) {
+      for (int j = 0; j < allCitas[i].length; j++) {
+        parsedCitas.add(allCitas[i][j].toDate());
+      }
+    }
+    return parsedCitas;
+  }
+
   Future<List> personalGetCitasToday() async {
     List allCitas = await personalGetAllCitas();
     List citasToday = [];
