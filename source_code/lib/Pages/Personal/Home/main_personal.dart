@@ -1,4 +1,6 @@
+import 'package:dental385/Pages/Personal/Misc/CitasPersonal.dart';
 import 'package:dental385/Pages/Personal/QR/qr_personal.dart';
+import 'package:dental385/Pages/Personal/personal_service.dart';
 import 'package:dental385/themes.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +11,7 @@ class MainPersonal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    PersonalService service = PersonalService();
     return Scaffold(
         appBar: AppBar(
           backgroundColor: primaryColorPersonal,
@@ -32,7 +35,12 @@ class MainPersonal extends StatelessWidget {
                           minimumSize: Size.fromHeight(50),
                           primary: Theme.of(context).canvasColor,
                           side: BorderSide(width: 1.0, color: Colors.grey)),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CitasPersonal()));
+                      },
                     ),
                   ),
                   Padding(
