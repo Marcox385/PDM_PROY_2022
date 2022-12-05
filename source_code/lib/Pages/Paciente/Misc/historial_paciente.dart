@@ -1,3 +1,4 @@
+import 'package:dental385/Pages/Paciente/pacient_service.dart';
 import 'package:flutter/material.dart';
 
 class HistorialPaciente extends StatelessWidget {
@@ -7,11 +8,27 @@ class HistorialPaciente extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        ListTile(title: Text("Cita del 15 de septiembre de 2022")),
-        ListTile(title: Text("Cita del 15 de septiembre de 2021"))
-      ],
-    );
+    return FutureBuilder(
+        future: PacientService().getPastAppointments(),
+        builder: ((context, data) {
+          if (!data.hasData) return Center(child: CircularProgressIndicator());
+
+          List<DateTime> past = data.data as List<DateTime>;
+
+          if (past.length == 0)
+            return Center(child: Text('No hay citas registradas'));
+
+          return ListView.builder(
+            itemCount: past.length,
+            itemBuilder: ((context, index) {
+              return Card(
+                  child: ListTile(
+                leading: Icon(Icons.watch_later, size: 50.0),
+                title: Text('Cita registrada'),
+                subtitle: Text(past[index].toString()),
+              ));
+            }),
+          );
+        }));
   }
 }
