@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -87,7 +88,8 @@ class PacientService {
           .then((QuerySnapshot querySnapshot) async {
         querySnapshot.docs.forEach((doc) {
           pacient_data['citas'] = doc['citas'];
-          pacient_data['fecha_nacimiento'] = doc['fecha_nacimiento'];
+          pacient_data['fecha_nacimiento'] = DateFormat('dd-MM-yyy')
+              .format((doc['fecha_nacimiento'] as Timestamp).toDate());
           pacient_data['foto'] = doc['foto'];
           pacient_data['nombre'] = doc['nombre'];
           pacient_data['sexo'] = doc['sexo'];
@@ -119,6 +121,47 @@ class PacientService {
       return promoList;
     } catch (e) {
       return [];
+    }
+  }
+
+  Future<DateTime> getClosestAppointment() async {
+    try {
+      dynamic currUser = FirebaseAuth.instance.currentUser;
+      dynamic currUserID = currUser!.uid;
+      CollectionReference pacients =
+          FirebaseFirestore.instance.collection('pacientes');
+
+      DateTime closest = DateTime(0);
+
+      await pacients
+          .where('uid', isEqualTo: currUserID)
+          .get()
+          .then((QuerySnapshot querySnapshot) async {
+        querySnapshot.docs.forEach((doc) {
+          print(doc['citas']);
+          List<DateTime> holder = [];
+
+          for (var i = 0; i < doc['citas'].length; i++) {
+            holder.add((doc['citas'][i] as Timestamp).toDate());
+          }
+
+          holder.sort((a, b) {
+            return a.compareTo(b);
+          });
+
+          DateTime now = DateTime.now();
+          for (int i = 0; i < holder.length; i++) {
+            if (holder[i].isAfter(now)) {
+              closest = holder[i];
+              return;
+            }
+          }
+        });
+      });
+
+      return closest;
+    } catch (e) {
+      return DateTime(0);
     }
   }
 

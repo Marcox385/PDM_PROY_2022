@@ -5,11 +5,11 @@
  * 
  * Pantalla principal con datos relevantes para citas del paciente
  */
-import 'package:dental385/Pages/Paciente/QR/QRPaciente.dart';
+import 'package:dental385/Pages/Paciente/QR/qr_paciente.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomePaciente extends StatelessWidget {
+  const HomePaciente({super.key});
 
   @override
   Widget build(BuildContext context) {

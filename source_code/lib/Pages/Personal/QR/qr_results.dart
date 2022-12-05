@@ -1,4 +1,4 @@
-import 'package:dental385/Pages/Personal/Home/MainPersonal.dart';
+import 'package:dental385/Pages/Personal/Home/main_personal.dart';
 import 'package:dental385/themes.dart';
 import 'package:flutter/material.dart';
 
