@@ -1,7 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PacientService {
@@ -62,12 +60,13 @@ class PacientService {
       return '';
     }
   }
-  
-    Future<int> pacientAddCita(DateTime new_cita) async {
+
+  Future<int> pacientAddCita(DateTime new_cita) async {
     await FirebaseFirestore.instance
         .collection('pacientes')
         .doc(FirebaseAuth.instance.currentUser!.uid)
-        .set({'citas': FieldValue.arrayUnion([new_cita])
+        .set({
+      'citas': FieldValue.arrayUnion([new_cita])
     }, SetOptions(merge: true));
 
     return 0;
@@ -124,14 +123,14 @@ class PacientService {
     }
   }
 
-  Future<DateTime> getClosestAppointment() async {
+  Future<dynamic> getClosestAppointment() async {
     try {
       dynamic currUser = FirebaseAuth.instance.currentUser;
       dynamic currUserID = currUser!.uid;
       CollectionReference pacients =
           FirebaseFirestore.instance.collection('pacientes');
 
-      DateTime closest = DateTime(0);
+      dynamic closest = DateTime(0);
 
       await pacients
           .where('uid', isEqualTo: currUserID)
@@ -156,35 +155,53 @@ class PacientService {
               return;
             }
           }
+
+          closest = false;
         });
       });
 
       return closest;
     } catch (e) {
-      return DateTime(0);
+      return false;
     }
   }
 
-  signInWithGoogle() async {
-    // Trigger the authentication flow
-    final GoogleSignInAccount? googleUser =
-        await GoogleSignIn(scopes: <String>["email"]).signIn();
+  Future<List<DateTime>> getPastAppointments() async {
+    try {
+      dynamic currUser = FirebaseAuth.instance.currentUser;
+      dynamic currUserID = currUser!.uid;
+      CollectionReference pacients =
+          FirebaseFirestore.instance.collection('pacientes');
 
-    // Obtain the auth details from the request
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser!.authentication;
+      List<DateTime> past = [];
 
-    // Create a new credential
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
+      await pacients
+          .where('uid', isEqualTo: currUserID)
+          .get()
+          .then((QuerySnapshot querySnapshot) async {
+        querySnapshot.docs.forEach((doc) {
+          print(doc['citas']);
+          List<DateTime> holder = [];
 
-    // Once signed in, return the UserCredential
-    return await FirebaseAuth.instance.signInWithCredential(credential);
-  }
+          for (var i = 0; i < doc['citas'].length; i++) {
+            holder.add((doc['citas'][i] as Timestamp).toDate());
+          }
 
-  signOut() {
-    FirebaseAuth.instance.signOut();
+          holder.sort((a, b) {
+            return a.compareTo(b);
+          });
+
+          DateTime now = DateTime.now();
+          for (int i = 0; i < holder.length; i++) {
+            if (holder[i].isAfter(now)) return;
+            past.add(holder[i]);
+          }
+        });
+      });
+
+      return past;
+    } catch (e) {
+      return [];
+    }
   }
 }

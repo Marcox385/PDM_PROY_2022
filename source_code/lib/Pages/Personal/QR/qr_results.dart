@@ -13,6 +13,7 @@ class QRResults extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List data = parseQR(raw_data);
+
     return Scaffold(
         appBar: AppBar(
           backgroundColor: primaryColorPersonal,
@@ -28,24 +29,26 @@ class QRResults extends StatelessWidget {
             )
           ],
         ),
-        body: ListView(
-          children: [
-            Card(
-                child: ListTile(
-                    leading: Icon(Icons.person, size: 50.0),
-                    title: Text('Nombre'),
-                    subtitle: Text('${data[0]}'))),
-            Card(
-                child: ListTile(
-                    leading: Icon(Icons.calendar_month, size: 50.0),
-                    title: Text('Cita'),
-                    subtitle: Text('${data[1]}'))),
-            Card(
-                child: ListTile(
-                    leading: Icon(Icons.cake, size: 50.0),
-                    title: Text('Fecha de nacimiento'),
-                    subtitle: Text('${data[2]}'))),
-          ],
-        ));
+        body: (data.length != 3)
+            ? Center(child: Text('CÓDIGO QR INVÁLIDO\nINTENTA DE NUEVO'))
+            : ListView(
+                children: [
+                  Card(
+                      child: ListTile(
+                          leading: Icon(Icons.person, size: 50.0),
+                          title: Text('Nombre'),
+                          subtitle: Text('${data[0]}'))),
+                  Card(
+                      child: ListTile(
+                          leading: Icon(Icons.calendar_month, size: 50.0),
+                          title: Text('Cita'),
+                          subtitle: Text('${data[1]}'))),
+                  Card(
+                      child: ListTile(
+                          leading: Icon(Icons.cake, size: 50.0),
+                          title: Text('Fecha de nacimiento'),
+                          subtitle: Text('${data[2]}'))),
+                ],
+              ));
   }
 }
