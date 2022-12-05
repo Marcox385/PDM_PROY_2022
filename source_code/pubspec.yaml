@@ -26,6 +26,7 @@ dependencies:
   firebase_core:
   firebase_storage:
   flutterfire_ui:
+  date_count_down:
 
 dev_dependencies:
   flutter_test:

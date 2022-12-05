@@ -5,9 +5,11 @@
  * 
  * Pantalla principal con datos relevantes para citas del paciente
  */
+import 'package:date_count_down/date_count_down.dart';
 import 'package:dental385/Pages/Paciente/QR/qr_paciente.dart';
 import 'package:dental385/Pages/Paciente/pacient_service.dart';
 import 'package:dental385/Utils/months_ES.dart';
+import 'package:dental385/themes.dart';
 import 'package:flutter/material.dart';
 
 class HomePaciente extends StatelessWidget {
@@ -54,13 +56,16 @@ class HomePaciente extends StatelessWidget {
                         .headlineLarge!
                         .copyWith(fontWeight: FontWeight.bold)),
                 // SizedBox(height: 15.0),
-                Text(
-                  '02 Días\n'
-                  '12 Horas\n'
-                  '05 Minutos\n'
-                  '38 Segundos\n',
-                  style: Theme.of(context).textTheme.headlineMedium,
-                  textAlign: TextAlign.center,
+                CountDownText(
+                  due: appointment,
+                  finishedText: "Done",
+                  showLabel: true,
+                  longDateName: true,
+                  daysTextLong: " Días ",
+                  hoursTextLong: " Horas ",
+                  minutesTextLong: " Mins ",
+                  secondsTextLong: " Secs ",
+                  style: TextStyle(color: primaryColorPaciente, fontSize: 23),
                 ),
                 // SizedBox(height: 35.0),
                 IconButton(
