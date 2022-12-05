@@ -5,12 +5,12 @@
  * 
  * Contenedor para seleccionar pantallas del paciente
  */
-import 'package:dental385/Pages/Login/pacient_service.dart';
+import 'package:dental385/Pages/Paciente/pacient_service.dart';
 import 'package:dental385/Pages/Paciente/Home/home_screen.dart';
-import 'package:dental385/Pages/Paciente/Misc/HistorialPaciente.dart';
-import 'package:dental385/Pages/Paciente/Misc/PromoMesPaciente.dart';
+import 'package:dental385/Pages/Paciente/Misc/historial_paciente.dart';
+import 'package:dental385/Pages/Paciente/Misc/promo_mes_paciente.dart';
 import 'package:dental385/Pages/Paciente/Misc/hacer_cita.dart';
-import 'package:dental385/Pages/Paciente/Profile/PerfilPaciente.dart';
+import 'package:dental385/Pages/Paciente/Profile/perfil_paciente.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

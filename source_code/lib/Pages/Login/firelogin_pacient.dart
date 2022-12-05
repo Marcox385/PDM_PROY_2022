@@ -1,4 +1,4 @@
-import 'package:dental385/Pages/Login/pacient_service.dart';
+import 'package:dental385/Pages/Paciente/pacient_service.dart';
 import 'package:dental385/Pages/Paciente/Home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/auth.dart';

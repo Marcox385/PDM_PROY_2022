@@ -18,7 +18,7 @@ class PacientService {
         if (querySnapshot.size == 0) {
           await pacients.doc(currUserID).set({
             'uid': currUserID,
-            'citas': {},
+            'citas': [],
             'fecha_nacimiento': DateTime.parse('2000-12-13'),
             'nombre': currUser!.displayName,
             'sexo': 'N/A',
@@ -59,6 +59,37 @@ class PacientService {
       return pacient_name;
     } catch (e) {
       return '';
+    }
+  }
+
+  Future<Map<String, dynamic>> pacientData() async {
+    try {
+      dynamic currUser = FirebaseAuth.instance.currentUser;
+      dynamic currUserID = currUser!.uid;
+      CollectionReference pacients =
+          FirebaseFirestore.instance.collection('pacientes');
+
+      Map<String, dynamic> pacient_data = {};
+
+      await pacients
+          .where('uid', isEqualTo: currUserID)
+          .get()
+          .then((QuerySnapshot querySnapshot) async {
+        querySnapshot.docs.forEach((doc) {
+          pacient_data['citas'] = doc['citas'];
+          pacient_data['fecha_nacimiento'] = doc['fecha_nacimiento'];
+          pacient_data['foto'] = doc['foto'];
+          pacient_data['nombre'] = doc['nombre'];
+          pacient_data['sexo'] = doc['sexo'];
+          pacient_data['telefono'] = doc['telefono'];
+
+          return;
+        });
+      });
+
+      return pacient_data;
+    } catch (e) {
+      return {};
     }
   }
 
